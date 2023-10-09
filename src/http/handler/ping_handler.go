@@ -4,6 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/irvingdinh/osgarth-api/src/component/config"
 )
 
 //go:generate mockery --name=PingHandler --case=snake
@@ -20,7 +22,5 @@ type pingHandlerImpl struct {
 }
 
 func (i *pingHandlerImpl) Ping(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"status": http.StatusOK,
-	})
+	c.Redirect(http.StatusTemporaryRedirect, config.GetAppConfig().RedirectUrl)
 }

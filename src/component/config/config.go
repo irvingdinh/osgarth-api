@@ -31,12 +31,14 @@ func Load() {
 }
 
 type AppConfig struct {
-	Env string `json:"env"`
+	Env         string `json:"env"`
+	RedirectUrl string `json:"redirectUrl"`
 }
 
 func GetAppConfig() AppConfig {
 	return AppConfig{
-		Env: viper.GetString("app.env"),
+		Env:         viper.GetString("app.env"),
+		RedirectUrl: viper.GetString("app.redirectUrl"),
 	}
 }
 
@@ -47,6 +49,18 @@ type HTTPConfig struct {
 func GetHTTPConfig() HTTPConfig {
 	return HTTPConfig{
 		Port: viper.GetUint64("http.port"),
+	}
+}
+
+type DatabaseConfig struct {
+	URI  string `json:"uri"`
+	Name string `json:"name"`
+}
+
+func GetDatabaseConfig() DatabaseConfig {
+	return DatabaseConfig{
+		URI:  viper.GetString("database.uri"),
+		Name: viper.GetString("database.name"),
 	}
 }
 
@@ -95,8 +109,9 @@ func GetLoggingConfig() LoggingConfig {
 
 func AsMap() map[string]interface{} {
 	return map[string]interface{}{
-		"app":     GetAppConfig(),
-		"http":    GetHTTPConfig(),
-		"logging": GetLoggingConfig(),
+		"app":      GetAppConfig(),
+		"http":     GetHTTPConfig(),
+		"database": GetDatabaseConfig(),
+		"logging":  GetLoggingConfig(),
 	}
 }

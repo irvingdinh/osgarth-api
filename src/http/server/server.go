@@ -51,7 +51,7 @@ func (i *serverImpl) withRouter() {
 	router.Use(middleware.Logger())
 
 	router.GET("/", i.handler.PingHandler().Ping)
-	router.GET("/api", i.handler.PingHandler().Ping)
+	router.GET("/:slug", i.handler.ItemHandler().GetItem)
 
 	i.router = router
 }

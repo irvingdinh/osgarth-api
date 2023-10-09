@@ -3,6 +3,11 @@
 
 app:
   env: local # E.g. local, staging, production.
+  redirectUrl: "https://irving.dev"
 
 http:
   port: 8000
+
+database:
+  uri: "mongodb://127.0.0.1:27017"
+  name: "osgarth"
